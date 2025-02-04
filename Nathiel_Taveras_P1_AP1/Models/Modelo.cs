@@ -6,7 +6,5 @@ namespace Nathiel_Taveras_P1_AP1.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage ="Este campo es requerido")]
-        public string Nombre { get; set; }
     }
 }
