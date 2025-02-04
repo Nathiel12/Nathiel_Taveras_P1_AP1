@@ -2,6 +2,7 @@
 using Nathiel_Taveras_P1_AP1.DAL;
 using Nathiel_Taveras_P1_AP1.Models;
 
+
 namespace Nathiel_Taveras_P1_AP1.Services
 {
     public class ModeloService(IDbContextFactory<Contexto> DbFactory)
