@@ -1,6 +1,7 @@
 using Nathiel_Taveras_P1_AP1.Components;
 using Nathiel_Taveras_P1_AP1.DAL;
 using Microsoft.EntityFrameworkCore;
+using Nathiel_Taveras_P1_AP1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddRazorComponents()
 
 var ConStr = builder.Configuration.GetConnectionString("SqlConStr");
 builder.Services.AddDbContextFactory<Contexto>(o => o.UseSqlServer(ConStr));
+
+builder.Services.AddScoped<AportesService>();
 
 var app = builder.Build();
 
