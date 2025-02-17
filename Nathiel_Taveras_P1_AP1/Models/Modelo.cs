@@ -2,11 +2,17 @@
 
 namespace Nathiel_Taveras_P1_AP1.Models
 {
-    public class Modelo
+    public class Aportes
     {
         [Key]
-        public int Id { get; set; }
+        public int AportesId { get; set; }
         [Required(ErrorMessage ="Este campo es requerido")]
-        public string Nombre { get; set; }
+        public string Persona { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public DateTime Fecha { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]
+        public string Observacion { get; set; }
+        [Range(1, double.MaxValue, ErrorMessage = "El monto tiene que ser mayor de 1")]
+        public double Monto { get; set; }
     }
 }
