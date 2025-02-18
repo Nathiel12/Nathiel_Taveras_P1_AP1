@@ -1,4 +1,4 @@
-﻿@page "/Aporte/Editar/{AportesId: int}"
+﻿@page "/Aporte/Editar/{AportesId:int}"
 @inject AportesService aportesService
 @rendermode InteractiveServer
 
@@ -47,6 +47,9 @@
 </EditForm>
 
 @code {
+    [Parameter]
+    public int AportesId { get; set; }
+
     private Aportes Aporte { get; set; } = new Aportes();
     private string Success { get; set; } = string.Empty;
     private string Error { get; set; } = string.Empty;
