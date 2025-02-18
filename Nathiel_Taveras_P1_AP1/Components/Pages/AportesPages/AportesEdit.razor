@@ -1,0 +1,67 @@
+﻿@page "/Aporte/Editar/{AportesId: int}"
+@inject AportesService aportesService
+@rendermode InteractiveServer
+
+<PageTitle>Editar Registro</PageTitle>
+<EditForm Model="Aporte" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <div class="container">
+
+        <label style="color:red;" hidden="@string.IsNullOrEmpty(Error)">@Error</label>
+        <label style="color:green;" hidden="@string.IsNullOrEmpty(Success)">@Success</label>
+
+        <div class="card shadow-lg">
+            <div class="card-header text-center">
+                <h5 class="card-title">Crear Registro</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label"><strong>AporteId</strong></label>
+                    <InputNumber class="form-control" @bind-Value="Aporte.AportesId" readonly></InputNumber>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Fecha</strong></label>
+                    <InputDate class="form-control" @bind-Value="Aporte.Fecha"></InputDate>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Persona</strong></label>
+                    <InputText class="form-control" @bind-Value="Aporte.Persona"></InputText>
+                    <ValidationMessage For="(() => Aporte.Persona)"></ValidationMessage>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Observacion</strong></label>
+                    <ValidationMessage For="(() => Aporte.Observacion)"></ValidationMessage>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Monto</strong></label>
+                    <ValidationMessage For="(() => Aporte.Monto)"></ValidationMessage>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/Aporte/Index" class="btn btn-outline-danger bi bi-arrow-left">Volver</a>
+                <button type="submit" class="btn btn-outline-success bi bi-floppy">Guardar</button>
+            </div>
+        </div>
+
+    </div>
+</EditForm>
+
+@code {
+    private Aportes Aporte { get; set; } = new Aportes();
+    private string Success { get; set; } = string.Empty;
+    private string Error { get; set; } = string.Empty;
+
+    private async Task Guardar()
+    {
+        var guardo = await aportesService.Guardar(this.Aporte);
+        if (guardo != null)
+        {
+            Success = "Registro guardado correctamente";
+        }
+        else
+        {
+            Error = "Error al guardar el registro";
+        }
+
+    }
+}
