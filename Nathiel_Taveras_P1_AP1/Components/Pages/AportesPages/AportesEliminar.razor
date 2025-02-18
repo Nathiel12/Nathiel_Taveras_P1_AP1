@@ -1,0 +1,58 @@
+﻿@page "/Aporte/Eliminar/{AportesId:int}"
+@inject AportesService aportesService
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
+
+<PageTitle>Eliminar</PageTitle>
+<label style="color:red" hidden="@string.IsNullOrEmpty(Confirmar)">@Confirmar</label>
+<label style="color:darkred">@Pregunta</label>
+
+<div class="container">
+	<div class="card shadow-lg">
+		<div class="card-header text-center">
+			<h5 class="card-title">Eliminar</h5>
+		</div>
+		<div class="card-body">
+			<p><strong>SistemaId:</strong>@Aporte.AportesId</p>
+			<p><strong>Fecha:</strong>@Aporte.Fecha</p>
+			<p><strong>Persona:</strong>@Aporte.Persona</p>
+			<p><strong>Observacion:</strong>@Aporte.Observacion</p>
+			<p><strong>Monto:</strong>@Aporte.Monto</p>
+		</div>
+		<div class="card-footer">
+			<a href="/Sistema/Index" class="btn btn-secondary bi bi-arrow-left">Volver</a>
+			<button type="button" class="btn btn-danger" @onclick="Eliminar">Eliminar</button>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public int AportesId { get; set; }
+
+	private Aportes Aporte { get; set; } = new Aportes();
+	private string Confirmar { get; set; } = string.Empty;
+	private string Pregunta { get; set; } = string.Empty;
+
+	protected override async Task OnInitializedAsync()
+	{
+		Aporte = await aportesService.Buscar(AportesId);
+		Pregunta = "¿Esta seguro de querer eliminar el registro?";
+	}
+
+	private async Task Eliminar()
+	{
+		var eliminado = await aportesService.Eliminar(Aporte.AportesId);
+		if (eliminado != null)
+		{
+			Confirmar = "Registro eliminado correctamente";
+			await Task.Delay(2000);
+			navigationManager.NavigateTo("/Aporte/Index");
+		}
+		else
+		{
+			Confirmar = "Error al eliminar el registro";
+		}
+	}
+
+}
