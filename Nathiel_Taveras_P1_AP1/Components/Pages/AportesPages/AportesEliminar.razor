@@ -14,10 +14,10 @@
 		</div>
 		<div class="card-body">
 			<p><strong>SistemaId:</strong>@Aporte.AportesId</p>
-			<p><strong>Fecha:</strong>@Aporte.Fecha</p>
+			<p><strong>Fecha:</strong>@Aporte.Fecha.ToString("dd / MM / yyyy")</p>
 			<p><strong>Persona:</strong>@Aporte.Persona</p>
 			<p><strong>Observacion:</strong>@Aporte.Observacion</p>
-			<p><strong>Monto:</strong>@Aporte.Monto</p>
+			<p><strong>Monto:</strong>@Aporte.Monto.ToString("N2")</p>
 		</div>
 		<div class="card-footer">
 			<a href="/Sistema/Index" class="btn btn-secondary bi bi-arrow-left">Volver</a>
