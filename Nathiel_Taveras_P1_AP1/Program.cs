@@ -2,8 +2,16 @@ using Nathiel_Taveras_P1_AP1.Components;
 using Nathiel_Taveras_P1_AP1.DAL;
 using Microsoft.EntityFrameworkCore;
 using Nathiel_Taveras_P1_AP1.Services;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var culture = new CultureInfo("es-US");
+CultureInfo.DefaultThreadCurrentCulture = culture;
+CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+CultureInfo.CurrentCulture = culture;
+CultureInfo.CurrentUICulture = culture;
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
