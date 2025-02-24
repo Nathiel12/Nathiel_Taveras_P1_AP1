@@ -56,6 +56,10 @@
     private string Success { get; set; } = string.Empty;
     private string Error { get; set; } = string.Empty;
 
+    protected override async Task OnInitializedAsync(){
+        Aporte = await aportesService.Buscar(AportesId);
+    }
+
     private async Task Guardar()
     {
         var guardo = await aportesService.Guardar(this.Aporte);
